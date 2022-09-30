@@ -38,9 +38,11 @@ const App = () => {
 
 const largestNumber = vote.indexOf (Math.max(...vote))
 // WHY DID THIS WORK? - this finds the max value index from the  array usetate vote
+// Stackoverflow guy said: It performs twice as many comparisons as necessary and will throw a RangeError on large arrays, though. I’d stick to the function.
+// question on google "find index of max number in an array"
 
   return (
-    <div>
+    <div className='center'>
     <h1>Anecdote of the Day</h1>
      <p>{anecdotes[selected]}</p> 
      <p>has {vote[selected]} votes</p>
@@ -50,7 +52,7 @@ const largestNumber = vote.indexOf (Math.max(...vote))
       <br />
       <h2>Anecdote with Most Votes</h2>
       <p>{anecdotes[largestNumber]}</p>
-      <p>has {vote[largestNumber]}</p>
+      <p>has {vote[largestNumber]} votes</p>
     </div>
   )
 }
