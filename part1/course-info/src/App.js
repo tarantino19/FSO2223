@@ -21,6 +21,7 @@ const Content = (props) => {
 const Total =  props=> (
         <p>Number of exercises {props.parts.reduce ((acc, part) => part.exercises + acc,  0)} </p>
 )
+// can be this code as well to add all  -   <Total sum={parts[0].exercises + parts[1].exercises + parts[2].exercises} />
 //accumulator needs to go first 
 
 // CONST APP
@@ -50,7 +51,6 @@ const App = () => {
     <Header course={course.name} />
     <Content parts={course.parts}/>
    <Total parts = {course.parts}/>
-        
     </div>
   )
 }

@@ -16,7 +16,7 @@ const App = () => {
 
 
   const [selected, setSelected] = useState(0)
-  const [vote, setVote] = useState(new Array (anecdotes.length).fill (0))
+  const [vote, setVote] = useState(new Array (anecdotes.length).fill (0)) //or [0,0,0,0,0,0,0,0]
   // why new Array - creates a new array that we don't have to change in value - then .fill put it as a integer - a new array we can select later
   //new array ANECDOTED.LENGTH same length ...then
   //The fill() method changes all elements in an array to a static value, from a start index (default 0 ) to an end index (default array. length )
@@ -36,7 +36,8 @@ const App = () => {
   //copy[selected]++  - then we add +1 to every click in the generateVote button
   // setVote (copy) = this applies the function to the copied state
 
-const largestNumber = vote.indexOf (Math.max(...vote))
+const largestNumber = vote.indexOf (Math.max(...vote)) 
+// math.max needs a value
 // WHY DID THIS WORK? - this finds the max value index from the  array usetate vote
 // Stackoverflow guy said: It performs twice as many comparisons as necessary and will throw a RangeError on large arrays, though. I’d stick to the function.
 // question on google "find index of max number in an array"
