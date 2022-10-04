@@ -3,9 +3,9 @@ import React from 'react'
   const Courses = ({courses}) => (
     <div>
             {courses.map ( course => (
-              <div>
-              <Header courseName={course.name} />
-              <Content parts={course.parts} />
+              <div key={course.id} >
+              <Header heading={course.name} />
+              <Content parts={course.parts} key={course.id}/>
               <Total parts={course.parts} />
               </div>
             )
@@ -13,23 +13,25 @@ import React from 'react'
     </div>
   )
 
-  const Header = ({courseName}) => {
+  const Header = ({heading}) => {
       return (
-          <h1>{courseName}</h1>
+          <h1>{heading}</h1>
       )
-  }
-  
-  const Content = ({ parts }) => {
-    return <div> 
-                    {parts.map (part => <Part key={part.id} part={part} /> )}
-                </div>
   }
 
   const Part = ({part}) => {
-    return  <p>
-                {part.name} {part.exercises}
-                </p>
+    return  <ul>
+                    {part.name} {part.exercises}
+                </ul>
   }
+
+  
+  const Content = ({ parts }) => {
+    return <div> 
+                    {parts.map (part => <Part key={part.id} part={part}/> )}
+                </div>
+  }
+
   
   const Total =  ({parts})=> (
         <h3> Total of {parts.reduce ((acc, part) => {

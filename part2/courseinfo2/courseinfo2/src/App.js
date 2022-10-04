@@ -49,7 +49,7 @@ const App = () => {
   ]
 
   return (
-      <Courses courses={courses} />
+      <Courses courses={courses}/>
   )
 }
 
