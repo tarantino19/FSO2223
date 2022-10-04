@@ -3,6 +3,7 @@ import './App.css';
 import { useState } from 'react'
 import Headings from './components/headings';
 
+
 const App = () => {
   const [persons, setPersons] = useState([
     { name: 'Arto Hellas', number: '040-123456', id: 1 },
@@ -39,6 +40,8 @@ const App = () => {
   }
     // input loses focus onchange - cant fix yet
     
+
+
   return (
     <div>
       <Headings heading="Phonebook" />
@@ -74,12 +77,10 @@ const App = () => {
       </form>
 
       <Headings heading="Numbers" />
-
-      return
-        {persons.filter (person => person.name.toLowerCase ().includes (filterValue)).map (person => (
+      <>{persons.filter (person => person.name.toLowerCase ().includes (filterValue)).map (person => (
           <div key={person.name}>{person.name} {person.number} </div>
         ))
-    }
+    }</>
     </div>
   )
 }
