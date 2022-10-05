@@ -1,13 +1,39 @@
 import './App.css';
 import Note from './components/note'
-import { useState } from 'react'
+import axios from 'axios'
+import { useState, useEffect } from 'react'
 
-//this part, for adding notes
 
-const App = ( props ) => {
-  const [notes, setNotes] = useState (props.notes)
-  const [newNote, setNewNote] = useState('') 
+//using the axios, we're not getting the data from another js file anymore
+// it's in the localhost w/c would be substituted to a real website url soon
+
+const App = () => {
+  const [notes, setNotes] = useState([])
+  const [newNote, setNewNote] = useState('')
   const [showAll, setShowAll] = useState(true)
+
+  useEffect(() => {
+    console.log('effect')
+    axios
+      .get('http://localhost:3001/notes')
+      .then(response => {
+        console.log('promise fulfilled')
+        setNotes(response.data)
+      })
+  }, [])
+  console.log('render', notes.length, 'notes')
+
+  // const hook = () => {
+  //   console.log('effect')
+  //   axios
+  //     .get('http://localhost:3001/notes')
+  //     .then(response => {
+  //       console.log('promise fulfilled')
+  //       setNotes(response.data)
+  //     })
+  // }
+  
+  // useEffect(hook, [])  - this is same as the one above
 
   const addNote = (event) => {
     event.preventDefault()
@@ -110,3 +136,31 @@ export default App;
 //https://fullstackopen.com/en/part2/forms
 
 //check for way to add a list 
+
+
+
+// *** EVENT LOOPS ***
+
+
+
+// ** EFFECT HOOKS **
+
+// const hook = () => {
+//   console.log('effect')
+//   axios
+//     .get('http://localhost:3001/notes')
+//     .then(response => {
+//       console.log('promise fulfilled')
+//       setNotes(response.data)
+//     })
+// }
+
+// useEffect(hook, [])
+
+// Now we can see more clearly that the function useEffect actually takes two parameters. The first is a function, the effect itself. According to the documentation:
+
+// By default, effects run after every completed render, but you can choose to fire it only when certain values have changed.
+
+// So by default the effect is always run after the component has been rendered. In our case, however, we only want to execute the effect along with the first render.
+
+// The second parameter of useEffect is used to specify how often the effect is run. If the second parameter is an empty array [], then the effect is only run along with the first render of the component.
