@@ -1,7 +1,11 @@
 import './App.css';
 import { useState, useEffect } from 'react'
 import Headings from './components/headings';
+import Filter from './components/filter';
+import PersonForm from './components/personform';
+import Persons from './components/persons';
 import axios from 'axios'
+
 
 const App = () => {
   const [persons, setPersons] = useState ([])
@@ -42,48 +46,16 @@ const App = () => {
     setFilterValue ((event.target.value).toLowerCase ())
   }
     // input loses focus onchange - cant fix yet
-    
 
 
   return (
     <div>
-      <Headings heading="Phonebook" />
-      <p>filter shown with <input 
-      type="text"
-      value={filterValue}
-      onChange={filterSearch}
-      >
-      </input>
-      </p>
-
-      <Headings heading="Add a New" />
-
-      <form onSubmit={addName}>
-
-        <div>
-          name: <input value={newName} 
-          onChange={handleNewNameChange}
-          />
-        </div>
-        <div>
-        number: <input  
-        type="number"
-        value={newNumber} 
-        onChange={handleNewNumberChange}
-        />
-      </div>
-
-
-        <div>
-          <button type="submit">add</button>
-        </div>
-      </form>
-
+    <Headings heading="Phonebook" />
+    <Filter filterValue={filterValue} filterSearch={filterSearch} />
+    <Headings heading="Add a New" />
+    <PersonForm addName={addName} newName={newName} handleNewNameChange={handleNewNameChange} newNumber={newNumber} handleNewNumberChange={handleNewNumberChange}/>
       <Headings heading="Numbers" />
-      <>{persons.filter (person => person.name.toLowerCase ().includes (filterValue)).map (person => (
-          <div key={person.name}>{person.name} {person.number} </div>
-        ))
-    }</>
+      <Persons persons={persons} filterValue={filterValue}  />
     </div>
   )
 }
