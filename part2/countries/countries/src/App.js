@@ -10,17 +10,19 @@ function Weather ({filteredCountries}) {
   return (
     <div>
     <h3>Weather in {filteredCountries[0].capital}</h3>
-    <p>temperature data Celcius</p>
+    <p>temperature Celcius</p>
     <p>weather icon here</p>
-    <p>wind data here m/s</p>
+    <p>wind:  m/s</p>
     </div>
   )
 }
 
+
+
 function App () {
   const [countries, setCountries] = useState ([])
   const [search, setSearch] = useState ("")
-  // const [showCountry, setShowCountry] = useState ({})
+  const [showCountry, setShowCountry] = useState (false)
   const [weather, setWeather] = useState ({})
 
   // GET COUNTRIES
@@ -37,32 +39,25 @@ function App () {
       )
   }, [])
 
+  console.log(countries);
+
 const handleChange = event => setSearch (event.target.value)
 
 const filteredCountries = countries.filter (country => country.name.toLowerCase().includes (search.toLowerCase ()))
 
-// GET WEATHER
 
-useEffect(() => {
-  axios
-    .get(
-      `https://api.openweathermap.org/data/2.5/weather?id=2172797&appid={API key}`
-    )
-    .then((response) => {
-      setWeather(response.data);
-    });
-}, []);
-
-console.log(weather);
-
+function showDetails () {
+  setShowCountry (!showCountry)
+}
 
   return (
     <div>
         <p>find countries <input value={search} onChange={handleChange} /></p>
         {filteredCountries.length > 10 && (
           <div>Go specify another filter</div>)}
-        {filteredCountries.length <= 10 && filteredCountries.length > 1 && filteredCountries.map (country => <div key={country.name.common}>{country.name} <button>show</button></div>)
+        {filteredCountries.length <= 10 && filteredCountries.length > 1 && filteredCountries.map (country => <div key={country.name.common}>{country.name} <button onClick={showDetails}>show</button></div>)
       }
+      {showCountry  && <CountryDetails filteredCountries={filteredCountries} />}
         {filteredCountries.length === 1 &&  (
 
           <>
@@ -72,6 +67,7 @@ console.log(weather);
           </>
         ) 
       }
+      
     </div>
   )
 }
