@@ -10,6 +10,7 @@ function App () {
   // const [showCountry, setShowCountry] = useState ({})
   const [weather, setWeather] = useState ({})
 
+  // GET COUNTRIES
   useEffect(() => {
     axios
       .get('https://restcountries.com/v3.1/all')
@@ -27,6 +28,22 @@ const handleChange = event => setSearch (event.target.value)
 
 const filteredCountries = countries.filter (country => country.name.toLowerCase().includes (search.toLowerCase ()))
 
+// GET WEATHER
+
+const api_key = process.env.REACT_OPENWEATHER_KEY
+
+useEffect(() => {
+  axios
+    .get(
+      `https://api.openweathermap.org/data/2.5/forecast?id=524901&appid=${api_key}`
+    )
+    .then((response) => {
+      setWeather(response.data);
+    });
+}, []);
+
+console.log(weather);
+
 
   return (
     <div>
@@ -41,15 +58,16 @@ const filteredCountries = countries.filter (country => country.name.toLowerCase(
             <CountryDetails filteredCountries={filteredCountries} />
 
               <h3>Weather in {filteredCountries[0].capital}</h3>
-              <div>temperature</div>
+              <p>temperature</p>
           </>
         ) 
       }
     </div>
   )
-
 }
-
 
 export default App;
 
+              // <div>temperature {weather.city.temp} °C</div>
+
+              //cant figure out 2.13 and 2.14 at the moment, getting API and transferring it into UI is quite confusing to me at the moment, will come back to these at a later date.

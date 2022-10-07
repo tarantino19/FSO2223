@@ -3,7 +3,7 @@ import React from "react";
 
 function CountryDetails ({filteredCountries}) {
     return (
-      <>
+     <>
       <h1>{filteredCountries[0].name}</h1>
       <p>capital: {filteredCountries[0].capital}</p>
       <p>area: {filteredCountries[0].area}</p>
