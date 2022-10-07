@@ -35,6 +35,10 @@ const App = () => {
   
   // useEffect(hook, [])  - this is same as the one above
 
+  const toggleImportanceOf = (id) => {
+    console.log('importance of ' + id + ' needs to be toggled')
+  }
+
   const addNote = (event) => {
     event.preventDefault()
     const noteObject = {
@@ -43,10 +47,18 @@ const App = () => {
       important: Math.random() < 0.5,
       id: notes.length + 1,
     }
+
+    axios
+    .post('http://localhost:3001/notes', noteObject)
+    .then(response => {
+      setNotes(notes.concat(response.data))
+      setNewNote('')
+    })
+}
   
-    setNotes(notes.concat(noteObject)) // The new note is added to the list of notes using the concat array method  - noteObject gets added to the "notes"
-    setNewNote('')  //The event handler also resets the value of the controlled input element by calling the setNewNote function of the newNote state
-  }
+    // setNotes(notes.concat(noteObject)) // The new note is added to the list of notes using the concat array method  - noteObject gets added to the "notes"
+    // setNewNote('')  //The event handler also resets the value of the controlled input element by calling the setNewNote function of the newNote state
+  // }
 
   const handleNoteChange = (event) => {
     console.log(event.target.value);
@@ -65,17 +77,21 @@ const App = () => {
 
   return (
     <div>
-      <h1>Notes</h1>
-      <div>
-        <button onClick={() => setShowAll(!showAll)}>
+    <h1>Notes</h1>
+    <div>
+      <button onClick={() => setShowAll(!showAll)}>
         show {showAll ? 'important' : 'all' }
       </button>
-      </div>
-      <ul>
-            {notesToShow.map (note => 
-              <Note key={note.id} note={note} />
-              )}
-      </ul>
+    </div>      
+    <ul>
+      {notesToShow.map(note => 
+        <Note
+          key={note.id}
+          note={note} 
+          toggleImportance={() => toggleImportanceOf(note.id)}
+        />
+      )}
+    </ul>
       <form onSubmit={addNote}>
           <input 
           value={newNote}

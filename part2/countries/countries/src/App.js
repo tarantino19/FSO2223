@@ -3,7 +3,8 @@ import { useState, useEffect } from 'react'
 import axios from 'axios'
 import CountryDetails from './components/CountryDetails';
 
-const api_key = process.env.REACT_OPENWEATHER_KEY
+
+const api_key = process.env.OPENWEATHER_API_KEY
 
 function Weather ({filteredCountries}) {
   return (
@@ -15,7 +16,6 @@ function Weather ({filteredCountries}) {
     </div>
   )
 }
-
 
 function App () {
   const [countries, setCountries] = useState ([])
@@ -46,7 +46,7 @@ const filteredCountries = countries.filter (country => country.name.toLowerCase(
 useEffect(() => {
   axios
     .get(
-      `https://api.openweathermap.org/data/2.5/forecast?id=524901&appid=${api_key}`
+      `https://api.openweathermap.org/data/2.5/weather?id=2172797&appid={API key}`
     )
     .then((response) => {
       setWeather(response.data);
@@ -85,4 +85,4 @@ export default App;
 
               // api
 
-              //http://api.openweathermap.org/data/2.5/forecast?id=524901&appid=f5cbe30d07bd3f43ce63d8ebb74bd31d
+        
