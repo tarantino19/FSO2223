@@ -3,6 +3,19 @@ import { useState, useEffect } from 'react'
 import axios from 'axios'
 import CountryDetails from './components/CountryDetails';
 
+const api_key = process.env.REACT_OPENWEATHER_KEY
+
+function Weather ({filteredCountries}) {
+  return (
+    <div>
+    <h3>Weather in {filteredCountries[0].capital}</h3>
+    <p>temperature data Celcius</p>
+    <p>weather icon here</p>
+    <p>wind data here m/s</p>
+    </div>
+  )
+}
+
 
 function App () {
   const [countries, setCountries] = useState ([])
@@ -30,8 +43,6 @@ const filteredCountries = countries.filter (country => country.name.toLowerCase(
 
 // GET WEATHER
 
-const api_key = process.env.REACT_OPENWEATHER_KEY
-
 useEffect(() => {
   axios
     .get(
@@ -56,9 +67,8 @@ console.log(weather);
 
           <>
             <CountryDetails filteredCountries={filteredCountries} />
+            <Weather filteredCountries={filteredCountries}/>
 
-              <h3>Weather in {filteredCountries[0].capital}</h3>
-              <p>temperature</p>
           </>
         ) 
       }
@@ -71,3 +81,8 @@ export default App;
               // <div>temperature {weather.city.temp} °C</div>
 
               //cant figure out 2.13 and 2.14 at the moment, getting API and transferring it into UI is quite confusing to me at the moment, will come back to these at a later date.
+
+
+              // api
+
+              //http://api.openweathermap.org/data/2.5/forecast?id=524901&appid=f5cbe30d07bd3f43ce63d8ebb74bd31d
