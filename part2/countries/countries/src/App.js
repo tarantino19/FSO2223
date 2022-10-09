@@ -4,7 +4,6 @@ import axios from 'axios'
 import CountryDetails from './components/CountryDetails';
 
 
-const api_key = process.env.OPENWEATHER_API_KEY
 
 function Weather ({filteredCountries}) {
   return (
@@ -23,7 +22,7 @@ function App () {
   const [countries, setCountries] = useState ([])
   const [search, setSearch] = useState ("")
   const [showCountry, setShowCountry] = useState (false)
-  const [weather, setWeather] = useState ({})
+  // const [weather, setWeather] = useState ({})
 
   // GET COUNTRIES
   useEffect(() => {
@@ -49,6 +48,15 @@ const filteredCountries = countries.filter (country => country.name.toLowerCase(
 function showDetails () {
   setShowCountry (!showCountry)
 }
+
+// function getWeather () {
+//   axios
+//     .get('https://api.openweathermap.org/data/2.5/weather?id=524901&lang=fr&appid=816f2a0a56d15cfb00a149f2b57c95c7')
+//     .then(response => {
+//       setWeather(response.data)
+//     })
+// }
+
 
   return (
     <div>

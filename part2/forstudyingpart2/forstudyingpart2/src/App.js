@@ -16,6 +16,7 @@ const App = () => {
       })
   }, [])
 
+
   const addNote = (event) => {
     event.preventDefault()
     const noteObject = {
@@ -46,7 +47,7 @@ const App = () => {
       .then(returnedNote => {
         setNotes(notes.map(note => note.id !== id ? note : returnedNote))
       })
-      .catch(error => {
+      .catch(_error => {
         alert(
           `the note '${note.content}' was already deleted from server`
         )
@@ -86,7 +87,11 @@ const App = () => {
   )
 }
 
-export default App
+
+
+
+
+export default App;
 
 
 

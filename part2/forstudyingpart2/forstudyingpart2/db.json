@@ -4,7 +4,7 @@
       "id": 1,
       "content": "HTML is easy",
       "date": "2022-1-17T17:30:31.098Z",
-      "important": true
+      "important": false
     },
     {
       "id": 2,
@@ -31,32 +31,32 @@
       "id": 5
     },
     {
-      "content": "This is not important",
-      "date": "2022-10-09T00:57:51.762Z",
+      "content": "Dot Post",
+      "date": "2022-10-09T06:43:09.382Z",
       "important": false,
       "id": 6
     },
     {
-      "content": "This is important",
-      "date": "2022-10-09T00:58:02.326Z",
-      "important": false,
+      "content": "dot post2",
+      "date": "2022-10-09T06:43:41.750Z",
+      "important": true,
       "id": 7
     },
     {
-      "content": "Is this working",
-      "date": "2022-10-09T01:09:54.253Z",
+      "content": "dotpost3",
+      "date": "2022-10-09T06:44:17.333Z",
       "important": false,
       "id": 8
     },
     {
-      "content": "Does this work?",
-      "date": "2022-10-09T01:36:55.090Z",
-      "important": false,
+      "content": "dpotpos4",
+      "date": "2022-10-09T06:44:21.814Z",
+      "important": true,
       "id": 9
     },
     {
-      "content": "test",
-      "date": "2022-10-09T02:03:38.359Z",
+      "content": "dotpost5",
+      "date": "2022-10-09T06:44:25.750Z",
       "important": true,
       "id": 10
     }

@@ -4,7 +4,7 @@ import Headings from './components/headings';
 import Filter from './components/filter';
 import PersonForm from './components/personform';
 import Persons from './components/persons';
-import axios from 'axios'
+import personService from './services/person'
 
 
 const App = () => {
@@ -14,25 +14,31 @@ const App = () => {
   const [filterValue, setFilterValue] = useState ("")
 
   useEffect(() => {
-    axios
-      .get('http://localhost:3001/persons')
-      .then(response => {
-        setPersons(response.data)
+    personService
+      .getAll()
+      .then(initialPerson => {
+        setPersons (initialPerson)
       })
   }, [])
 
-
-  function addName (event) {
+const addName = (event) => {
     event.preventDefault ()
     if (persons.find (person => person.name === newName)) {
       alert (`${newName} is already added to phonebook`) 
     } else {
       const newestName = { name: newName, number: newNumber}
-      setPersons (persons.concat (newestName))
-      setNewName ("")
-      setNewNumber ("")
-    }
-  }
+
+    personService
+      .create(newestName)
+      .then(returnedName => {
+        setPersons (persons.concat(returnedName))
+        setNewName (' ')
+        setNewNumber (' ')
+      })
+  } 
+}
+
+//function change
 
   function handleNewNameChange (event) {
     setNewName (event.target.value)
@@ -45,8 +51,6 @@ const App = () => {
   function filterSearch (event) {
     setFilterValue ((event.target.value).toLowerCase ())
   }
-    // input loses focus onchange - cant fix yet
-
 
   return (
     <div>
@@ -54,7 +58,7 @@ const App = () => {
     <Filter filterValue={filterValue} filterSearch={filterSearch} />
     <Headings heading="Add a New" />
     <PersonForm addName={addName} newName={newName} handleNewNameChange={handleNewNameChange} newNumber={newNumber} handleNewNumberChange={handleNewNumberChange}/>
-      <Headings heading="Numbers" />
+      <Headings heading="Name & Numbers" />
       <Persons persons={persons} filterValue={filterValue}  />
     </div>
   )
