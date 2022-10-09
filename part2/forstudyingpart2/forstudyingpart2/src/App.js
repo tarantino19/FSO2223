@@ -2,10 +2,9 @@ import './App.css';
 import Note from './components/note'
 import axios from 'axios'
 import { useState, useEffect } from 'react'
+import noteService from './services/notes'
 
-
-//using the axios, we're not getting the data from another js file anymore
-// it's in the localhost w/c would be substituted to a real website url soon
+console.log(noteService);
 
 const App = () => {
   const [notes, setNotes] = useState([])
@@ -13,30 +12,22 @@ const App = () => {
   const [showAll, setShowAll] = useState(true)
 
   useEffect(() => {
-    console.log('effect')
-    axios
-      .get('http://localhost:3001/notes')
-      .then(response => {
-        console.log('promise fulfilled')
-        setNotes(response.data)
+    noteService
+      .getAll()
+      .then(initialNotes => {
+        setNotes(initialNotes)
       })
   }, [])
-  console.log('render', notes.length, 'notes')
 
-  // const hook = () => {
-  //   console.log('effect')
-  //   axios
-  //     .get('http://localhost:3001/notes')
-  //     .then(response => {
-  //       console.log('promise fulfilled')
-  //       setNotes(response.data)
-  //     })
-  // }
-  
-  // useEffect(hook, [])  - this is same as the one above
+  const toggleImportanceOf = id => {
+    const note = notes.find(n => n.id === id)
+    const changedNote = { ...note, important: !note.important }
 
-  const toggleImportanceOf = (id) => {
-    console.log('importance of ' + id + ' needs to be toggled')
+    noteService
+      .update(id, changedNote)
+      .then(returnedNote => {
+        setNotes(notes.map(note => note.id !== id ? note : returnedNote))
+      })
   }
 
   const addNote = (event) => {
@@ -44,36 +35,25 @@ const App = () => {
     const noteObject = {
       content: newNote,
       date: new Date().toISOString(),
-      important: Math.random() < 0.5,
-      id: notes.length + 1,
+      important: Math.random() > 0.5
     }
 
-    axios
-    .post('http://localhost:3001/notes', noteObject)
-    .then(response => {
-      setNotes(notes.concat(response.data))
-      setNewNote('')
-    })
-}
-  
-    // setNotes(notes.concat(noteObject)) // The new note is added to the list of notes using the concat array method  - noteObject gets added to the "notes"
-    // setNewNote('')  //The event handler also resets the value of the controlled input element by calling the setNewNote function of the newNote state
-  // }
+    noteService
+      .create(noteObject)
+      .then(returnedNote => {
+        setNotes(notes.concat(returnedNote))
+        setNewNote('')
+      })
+  }
 
   const handleNoteChange = (event) => {
     console.log(event.target.value);
     setNewNote (event.target.value)
   }
 
-  // If the value of showAll is false, the notesToShow variable will be assigned to a list that only contains notes that have the important property set to true. Filtering is done with the help of the array filter method:
 
-  const notesToShow = showAll ? notes : notes.filter(note => note.important) // if show all is true, show all notes, if it's false, only show the important is true (in the notes const) - for completely separate button
+  const notesToShow = showAll ? notes : notes.filter(note => note.important) 
 
-
-  //Next, let's add functionality that enables users to toggle the showAll state of the application from the user interface.
-//   this part - button onclick showAll
-// !showAll means showAll is not true or false
-// notestoshowmap allows us 
 
   return (
     <div>
