@@ -1,6 +1,5 @@
 import './App.css';
 import Note from './components/note'
-import axios from 'axios'
 import { useState, useEffect } from 'react'
 import noteService from './services/notes'
 
@@ -83,16 +82,6 @@ const App = () => {
   )
 }
 
-//Because the code generating the li tags is JavaScript, it must be wrapped in curly braces in a JSX template just like all other JavaScript code.
-//separate lins for map for readability
-
-// addNote function  is on form onSubmit
-
-//event.preventDefault - is for the addnote function
-
-// input value for newNote...and onChange = function handNoteChange setNewNotes(that has event.target.value)
-
-// Let's change the component so that it stores a list of all the notes to be displayed in the notesToShow variable. The items of the list depend on the state of the component: - notesToShow.map
 
 export default App;
 
