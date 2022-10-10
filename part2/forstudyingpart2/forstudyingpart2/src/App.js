@@ -1,12 +1,14 @@
-import './App.css';
-import Note from './components/note'
 import { useState, useEffect } from 'react'
+
+import Note from './components/note'
+import Notification from './components/notification'
 import noteService from './services/notes'
 
 const App = () => {
   const [notes, setNotes] = useState([])
   const [newNote, setNewNote] = useState('')
   const [showAll, setShowAll] = useState(true)
+  const [errorMessage, setErrorMessage] = useState(null)
 
   useEffect(() => {
     noteService
@@ -15,7 +17,6 @@ const App = () => {
         setNotes(initialNotes)
       })
   }, [])
-
 
   const addNote = (event) => {
     event.preventDefault()
@@ -34,6 +35,7 @@ const App = () => {
       })
   }
 
+
   const handleNoteChange = (event) => {
     setNewNote(event.target.value)
   }
@@ -48,9 +50,12 @@ const App = () => {
         setNotes(notes.map(note => note.id !== id ? note : returnedNote))
       })
       .catch(_error => {
-        alert(
-          `the note '${note.content}' was already deleted from server`
+        setErrorMessage(
+          `Note '${note.content}' was already removed from server`
         )
+        setTimeout(() => {
+          setErrorMessage(null)
+        }, 5000)
         setNotes(notes.filter(n => n.id !== id))
       })
   }
@@ -62,6 +67,7 @@ const App = () => {
   return (
     <div>
       <h1>Notes</h1>
+      <Notification message={errorMessage} />
       <div>
         <button onClick={() => setShowAll(!showAll)}>
           show {showAll ? 'important' : 'all' }
@@ -87,12 +93,7 @@ const App = () => {
   )
 }
 
-
-
-
-
-export default App;
-
+export default App
 
 
 //console.log

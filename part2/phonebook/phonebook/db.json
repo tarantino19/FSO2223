@@ -1,11 +1,6 @@
 {
   "persons": [
     {
-      "name": "Arto Hellas",
-      "number": "040123456",
-      "id": 1
-    },
-    {
       "name": "Ada Lovelace",
       "number": "39445323523",
       "id": 2
@@ -16,24 +11,39 @@
       "id": 3
     },
     {
-      "name": "Mary Poppendieck",
-      "number": "39236423122",
-      "id": 4
-    },
-    {
       "name": "Red Mckinseyy",
       "number": "04348482309423",
       "id": 5
     },
     {
-      "name": "Heyo Michelle Obama",
-      "number": "0943434044343",
-      "id": 6
+      "name": "Red ",
+      "number": "32434324",
+      "id": 8
     },
     {
-      "name": "Kakoo",
-      "number": "0434384343",
-      "id": 7
+      "name": "Huhuhuhuh",
+      "number": "4234525346",
+      "id": 9
+    },
+    {
+      "name": "Ayoo Kamutato",
+      "number": "265465465464",
+      "id": 10
+    },
+    {
+      "name": "Oreo Goreyo",
+      "number": "37494543",
+      "id": 11
+    },
+    {
+      "name": "Kareoko Kokoa",
+      "number": "423423432",
+      "id": 12
+    },
+    {
+      "name": "Goreo Koryo Jr.",
+      "number": "654654645645",
+      "id": 13
     }
   ]
 }

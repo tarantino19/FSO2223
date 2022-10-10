@@ -1,17 +1,20 @@
-import './App.css';
+import "./App.css"
 import { useState, useEffect } from 'react'
 import Headings from './components/headings';
 import Filter from './components/filter';
 import PersonForm from './components/personform';
 import Persons from './components/persons';
 import personService from './services/person'
+import Notification from "./components/notification";
+
 
 
 const App = () => {
   const [persons, setPersons] = useState ([])
-  const [newName, setNewName] = useState('')
+  const [newName, setNewName] = useState("")
   const [newNumber, setNewNumber] = useState ("")
   const [filterValue, setFilterValue] = useState ("")
+  const [successMessage, setSuccessMessage] = useState (null)
 
   useEffect(() => {
     personService
@@ -32,11 +35,20 @@ const addName = (event) => {
       .create(newestName)
       .then(returnedName => {
         setPersons (persons.concat(returnedName))
+
+          setSuccessMessage(
+            `Added ${newestName.name} to the list`
+          )
+          setTimeout(() => {
+            setSuccessMessage(null)
+          }, 5000)
+
         setNewName (' ')
         setNewNumber (' ')
       })
   } 
 }
+
 
 //function change
 
@@ -52,14 +64,30 @@ const addName = (event) => {
     setFilterValue ((event.target.value).toLowerCase ())
   }
 
+
+const deletePerson = (id) => {  
+  
+  if (window.confirm (`Are you sure you want to delete this person?`)) {
+  }
+
+  personService
+  .remove (id)
+  .then (deletedPerson => 
+    persons.filter (person=> person.id !== deletedPerson.id)
+    );
+}
+
+
   return (
     <div>
     <Headings heading="Phonebook" />
+    <Notification successMessage={successMessage} />
     <Filter filterValue={filterValue} filterSearch={filterSearch} />
     <Headings heading="Add a New" />
     <PersonForm addName={addName} newName={newName} handleNewNameChange={handleNewNameChange} newNumber={newNumber} handleNewNumberChange={handleNewNumberChange}/>
       <Headings heading="Name & Numbers" />
-      <Persons persons={persons} filterValue={filterValue}  />
+      <Persons 
+      persons={persons} filterValue={filterValue} deletePerson={deletePerson} />
     </div>
   )
 }

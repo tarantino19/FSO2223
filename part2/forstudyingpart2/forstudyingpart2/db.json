@@ -29,36 +29,6 @@
       "date": "2022-10-07T06:34:50.604Z",
       "important": false,
       "id": 5
-    },
-    {
-      "content": "Dot Post",
-      "date": "2022-10-09T06:43:09.382Z",
-      "important": false,
-      "id": 6
-    },
-    {
-      "content": "dot post2",
-      "date": "2022-10-09T06:43:41.750Z",
-      "important": true,
-      "id": 7
-    },
-    {
-      "content": "dotpost3",
-      "date": "2022-10-09T06:44:17.333Z",
-      "important": false,
-      "id": 8
-    },
-    {
-      "content": "dpotpos4",
-      "date": "2022-10-09T06:44:21.814Z",
-      "important": true,
-      "id": 9
-    },
-    {
-      "content": "dotpost5",
-      "date": "2022-10-09T06:44:25.750Z",
-      "important": true,
-      "id": 10
     }
   ]
 }
