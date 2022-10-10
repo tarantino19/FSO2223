@@ -1,7 +1,4 @@
-
-
 import axios from 'axios'
-
 const baseUrl = 'http://localhost:3001/notes'
 
 const getAll = () => {
@@ -20,9 +17,5 @@ const update = (id, newObject) => {
   return request.then(response => response.data)
 }
 
-// eslint-disable-next-line
-export default { getAll, create, update }
-
-// or
-// const noteService = { getAll, create, update }
-// export default noteService
+const noteService = { getAll, create, update }
+export default noteService
