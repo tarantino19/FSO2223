@@ -40,5 +40,7 @@
   "devDependencies": {
     "install": "^0.13.0",
     "json-server": "^0.17.0"
-  }
+  },
+"proxy": "http://localhost:3001"
 }
+
